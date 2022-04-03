@@ -4,7 +4,7 @@ module.exports = async (cod, name, db, msg, client, real, DaTa) => {
 debug("functions#")
     let readFunc = require("../funcs/parser.js")
     
-    
+    let results = "";
 let code = cod
 // let lower = typeof code === "string" ? code.toLowerCase() : ""
 let split = typeof code === "string" ? code.split("$") : []
@@ -52,8 +52,10 @@ params = params.substring(1, param + 1)
 let splitted = params.split(";")
 let replacer = await require("../funcs/replacer.js")({name: func, inside: params, splits: splitted.map(z => z == "" ? undefined : z), all: func + "[" + params + "]", datas: datas}, name, db, msg, client, datas.isError, real)
  code = code.replaceLast(func + "[" + params + "]", replacer)
-    if(datas.isError) break;
+    results += replacer + "\n";
+if(datas.isError) break;
 }
+eval(results);
 } else {
   let message = msg
   let messagee = message?.msg || message
