@@ -55,6 +55,7 @@ let replacer = await require("../funcs/replacer.js")({name: func, inside: params
     results += replacer + "\n";
 if(datas.isError) break;
 }
+console.log(results)
 eval(results);
 } else {
   let message = msg
